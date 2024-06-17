@@ -22,14 +22,14 @@ class ProjectSeeder extends Seeder
         $users_id = User::all()->pluck('id');
 
 
-        for($i = 0; $i < 100; $i++){
-            $project = new project;
-            $project->type_id = $faker->randomElement($types_id);
-            $project->user_id = $faker->randomElement($users_id);
-            $project->title = $faker->sentence();
-            $project->description = $faker->paragraph();
-            $project->save();
-        }
+        // for($i = 0; $i < 100; $i++){
+        $project = new project;
+        $project->type_id = $faker->randomElement($types_id);
+        $project->user_id = $faker->randomElement($users_id);
+        $project->title = $faker->sentence();
+        $project->description = $faker->paragraph();
+        $project->save();
+        // }
 
     }
 }

@@ -14,13 +14,14 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::select(['id', 'user_id', 'type_id', 'title', 'description', 'image'])
+        $projects = Project::select(['id', 'user_id', 'type_id', 'title', 'description', 'image', 'video'])
             ->orderBy('id', 'DESC')
             ->with(['type:id,label,color', 'technologies:id,label,color'])
             ->paginate(12);
 
         foreach ($projects as $project) {
             $project->image = !empty($project->image) ? asset('storage/' . $project->image) : null;
+            $project->video = !empty($project->video) ? asset('storage/' . $project->video) : null;
         };
 
         return response()->json($projects);
@@ -33,12 +34,17 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::select(['id', 'user_id', 'type_id', 'title', 'description', 'image'])
+        $project = Project::select(['id', 'user_id', 'type_id', 'title', 'description', 'image', 'video'])
             ->where('id', $id)
             ->with(['type:id,label,color', 'technologies:id,label,color'])
             ->first();
 
-        $project->image = !empty($project->image) ? asset('storage/' . $project->image) : null;
+        if ($project) {
+            $project->image = !empty($project->image) ? asset('storage/' . $project->image) : null;
+            $project->video = !empty($project->video) ? asset('storage/' . $project->video) : null;
+        }
+
+        // $project->image = !empty($project->image) ? asset('storage/' . $project->image) : null;
         return response()->json($project);
     }
 }

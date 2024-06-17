@@ -36,6 +36,11 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label for="video">Video</label>
+                        <input type="file" class="form-control" id="video" name="video">
+                    </div>
+
                     <div class="col-4">
                         <label class="form-label" for="type_id">Type</label>
                         <select name="type_id" id="type_id" @class(['form-select', 'is-invalid' => $errors->has('type_id')])>

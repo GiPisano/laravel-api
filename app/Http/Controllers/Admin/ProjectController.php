@@ -59,6 +59,12 @@ class ProjectController extends Controller
             $img_path = Storage::put('uploads/projects', $data["image"]);
             $project->image = $img_path;
         }
+
+        if (Arr::exists($data, "video")) {
+            $video_path = Storage::put('uploads/projects/videos', $data["video"]);
+            $project->video = $video_path;
+        }
+
         $project->user_id = Auth::id();
 
 
@@ -118,6 +124,14 @@ class ProjectController extends Controller
             }
             $img_path = Storage::put('uploads/projects', $data["image"]);
             $project->image = $img_path;
+        }
+
+        if (Arr::exists($data, "video")) {
+            if (!empty($project->video)) {
+                Storage::delete($project->video);
+            }
+            $video_path = Storage::put('uploads/projects/videos', $data["video"]);
+            $project->video = $video_path;
         }
 
         $project->save();

@@ -25,10 +25,11 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:100',
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:5000',
             'type_id' => 'required|exists:types,id',
             'technologies' => 'required|exists:technologies,id',
-            'image' => 'nullable|image'
+            'image' => 'nullable|image',
+            'video' => 'nullable|mimes:mp4,mov,ogg,qt|max:200000', // massimo 200MB, regola MIME per i video
         ];
     }
 

@@ -25,9 +25,10 @@ class UpdateProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:100',
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:5000',
             'type_id' => 'required|exists:types,id',
-            'technologies' => 'required|exists:technologies,id'
+            'technologies' => 'required|exists:technologies,id',
+            'video' => 'nullable|mimes:mp4,mov,ogg,qt|max:200000', // massimo 200MB, regola MIME per i video
         ];
     }
 
@@ -42,7 +43,7 @@ class UpdateProjectRequest extends FormRequest
             'title.required' => 'The title is required',
             'title.string' => 'the title must be a text',
             'title.max' => 'The title must be :max characters',
-            
+
             'description.required' => 'The description is required',
             'description.string' => 'The description must be a text',
             'description.max' => 'The description must be :max characters',

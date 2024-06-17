@@ -19,6 +19,15 @@
                 </div>
             @endif
 
+            @if ($project->video)
+                <div class="mt-3">
+                    <video width="320" height="240" controls>
+                        <source src="{{ asset('storage/' . $project->video) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            @endif
+
             <div class="col-12">
                 <h2 class="h4">Author</h2>
                 <p>{{ $project->user->name }}</p>
